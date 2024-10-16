@@ -10,6 +10,7 @@
   - [Introduction](#introduction)
   - [Features](#features)
   - [Demo](#demo)
+    - [Chat Interface](#chat-interface)
   - [Technologies Used](#technologies-used)
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
@@ -21,7 +22,7 @@
     - [**API Key Input**](#api-key-input)
     - [**Model Selection**](#model-selection)
     - [**RAG Source Uploads**](#rag-source-uploads)
-    - [**Chat Interface**](#chat-interface)
+    - [**Chat Interface**](#chat-interface-1)
   - [Demo Video](#demo-video)
   - [Contributing](#contributing)
     - [**How to Contribute**](#how-to-contribute)
@@ -48,6 +49,8 @@ Whether you're developing an e-commerce platform, a real estate service, or any 
 ## Demo
 
 Check out a short demo of the application in action:
+### Chat Interface
+![Chat Interface](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)
 
 [![Watch the Demo](assets/demo-thumbnail.png)](https://www.youtube.com/watch?v=your-demo-video-link)
 
