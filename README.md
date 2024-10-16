@@ -52,7 +52,7 @@ Check out a short demo of the application in action:
 ### Chat Interface
 ![Chat Interface](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)
 
-[![Watch the Demo](assets/demo-thumbnail.png)](https://www.youtube.com/watch?v=your-demo-video-link)
+[![Watch the Demo](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)](https://www.youtube.com/watch?v=P8tOjiYEFqU)
 
 *Click the image above to watch the demo video.*
 
