@@ -11,19 +11,13 @@
   - [Features](#features)
   - [Demo](#demo)
     - [Chat Interface](#chat-interface)
+  - [Demo Video](#demo-video)
   - [Technologies Used](#technologies-used)
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
     - [Steps](#steps)
   - [Usage](#usage)
   - [Logging](#logging)
-  - [Screenshots](#screenshots)
-    - [**Home Screen**](#home-screen)
-    - [**API Key Input**](#api-key-input)
-    - [**Model Selection**](#model-selection)
-    - [**RAG Source Uploads**](#rag-source-uploads)
-    - [**Chat Interface**](#chat-interface-1)
-  - [Demo Video](#demo-video)
   - [Contributing](#contributing)
     - [**How to Contribute**](#how-to-contribute)
     - [**Guidelines**](#guidelines)
@@ -52,8 +46,12 @@ Check out a short demo of the application in action:
 ### Chat Interface
 ![Chat Interface](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)
 
+## Demo Video
+
+Watch the application in action:
+
 <!-- [![Watch the Demo](https://img.youtube.com/vi/P8tOjiYEFqU/0.jpg)](https://www.youtube.com/watch?v=P8tOjiYEFqU) -->
-[![Watch the Demo](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)](https://www.youtube.com/watch?v=P8tOjiYEFqU)
+[![Watch the Demo](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)](https://www.youtube.com/)
 
 *Click the image above to watch the demo video.*
 
@@ -83,8 +81,8 @@ Follow these steps to set up the RAG-Enhanced Chatbot Application on your local 
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/rag-chatbot.git
-   cd rag-chatbot
+   git clone git@github.com:abdurrahimcs50/RAG_Chatbot_Project.git
+   cd RAG_Chatbot_Project
    ```
 
 2. **Create a Virtual Environment**
@@ -97,6 +95,7 @@ Follow these steps to set up the RAG-Enhanced Chatbot Application on your local 
 3. **Install Dependencies**
 
    ```bash
+   cd src
    pip install -r requirements.txt
    ```
 
@@ -106,7 +105,6 @@ Follow these steps to set up the RAG-Enhanced Chatbot Application on your local 
 
    ```env
    OPENAI_API_KEY=your_openai_api_key
-   AZ_OPENAI_ENDPOINT=your_azure_endpoint
    ```
 
    *Ensure that you replace the placeholder values with your actual API keys.*
@@ -142,7 +140,7 @@ Follow these steps to set up the RAG-Enhanced Chatbot Application on your local 
 
    - Type your message in the chat input field and press Enter.
    - The assistant will respond based on your input and the integrated RAG sources.
-
+  
 5. **Logging**
 
    - All interactions and system events are logged in the `logs/` directory.
@@ -177,38 +175,6 @@ The application employs Python's built-in `logging` module to capture and store 
 2024-10-16 14:32:45,678 - INFO - Assistant response: To integrate RAG into your project...
 ```
 
-## Screenshots
-
-### **Home Screen**
-
-![Home Screen](assets/home_screen.png)
-
-### **API Key Input**
-
-![API Key Input](assets/api_key_input.png)
-
-### **Model Selection**
-
-![Model Selection](assets/model_selection.png)
-
-### **RAG Source Uploads**
-
-![RAG Source Uploads](assets/rag_uploads.png)
-
-### **Chat Interface**
-
-![Chat Interface](assets/chat_interface.png)
-
-*Replace the image paths (`assets/*.png`) with the actual paths to your images.*
-
-## Demo Video
-
-Watch the application in action:
-
-[![Watch the Demo](assets/demo-thumbnail.png)](https://www.youtube.com/watch?v=your-demo-video-link)
-
-*Click the image above to watch the demo video.*
-
 ## Contributing
 
 We welcome contributions from the community! Whether it's bug fixes, feature enhancements, or documentation improvements, your input is valuable.
@@ -222,8 +188,8 @@ We welcome contributions from the community! Whether it's bug fixes, feature enh
 2. **Clone Your Fork**
 
    ```bash
-   git clone https://github.com/yourusername/rag-chatbot.git
-   cd rag-chatbot
+   git clone git@github.com:abdurrahimcs50/RAG_Chatbot_Project.git
+   cd RAG_Chatbot_Project
    ```
 
 3. **Create a New Branch**
@@ -266,10 +232,10 @@ This project is licensed under the [MIT License](LICENSE).
 
 For any questions, suggestions, or feedback, feel free to reach out:
 
-- **MD Abdur Rahim (Kawsar)**
-- **Email**: [rahim@example.com](mailto:rahim@example.com)
+- **MD Abdur Rahim**
+- **Email**: [admin@rahim.com.bd](mailto:admin@rahim.com.bd)
 - **Website**: [www.rahim.com.bd](https://www.rahim.com.bd/)
-- **LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
+- **LinkedIn**: [https://www.linkedin.com/in/abdurrahimcs50/](https://www.linkedin.com/in/abdurrahimcs50/)
 
 ---
 
