@@ -1,7 +1,7 @@
 
 # RAG-Enhanced Chatbot Application 📚🤖
 
-![RAG Chatbot Banner](assets/banner.png)
+![RAG Chatbot Banner](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/RAG-Enhanced%20Chatbot%20Application.png)
 
 ## Table of Contents
 
