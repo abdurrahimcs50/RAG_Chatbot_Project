@@ -17,6 +17,10 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
+from decouple import config
+
+import chromadb
+
 dotenv.load_dotenv()
 
 os.environ["USER_AGENT"] = "myagent"
@@ -99,46 +103,80 @@ def load_url_to_db():
 
 
 def initialize_vector_db(docs):
-    if "AZ_OPENAI_API_KEY" not in os.environ:
-        embedding = OpenAIEmbeddings(api_key=st.session_state.openai_api_key)
-    else:
-        embedding = OpenAIEmbeddings(api_key=st.session_state.openai_api_key)
+    try:
+        # Attempt to get the OpenAI API key from the config or session state
+        openai_api_key = config('OPENAI_API_KEY')
+        print("OpenAI API key from config:", openai_api_key)
+        if not openai_api_key:
+            openai_api_key = st.session_state.get('openai_api_key', None)
+            if not openai_api_key:
+                raise KeyError("OpenAI API key not found in both config and session state")
+        
+        # Initialize OpenAI embeddings with the retrieved API key
+        embedding = OpenAIEmbeddings(api_key=openai_api_key)
 
-    vector_db = Chroma.from_documents(
-        documents=docs,
-        embedding=embedding,
-        collection_name=f"{str(time()).replace('.', '')[:14]}_" + st.session_state['session_id'],
-    )
+    except KeyError as e:
+        print(f"Error: {e}. Please set the OpenAI API key in the configuration or session state.")
+        return None
+    except Exception as e:
+        print(f"Unexpected error during OpenAI embeddings initialization: {e}")
+        return None
 
-    # We need to manage the number of collections that we have in memory, we will keep the last 20
-    chroma_client = vector_db._client
-    collection_names = sorted([collection.name for collection in chroma_client.list_collections()])
-    print("Number of collections:", len(collection_names))
-    while len(collection_names) > 20:
-        chroma_client.delete_collection(collection_names[0])
-        collection_names.pop(0)
+    try:
+        db_path = "./chroma_db"
+        client = chromadb.PersistentClient(path=db_path)
+        # Create a Chroma vector database with documents and embeddings
+        vector_db = Chroma.from_documents(
+            documents=docs,
+            embedding=embedding,
+            client=client,
+            collection_metadata={"hnsw:space": "cosine"},
+        )
+
+    except Exception as e:
+        print(f"Error creating or managing Chroma vector database: {e}")
+        return None
 
     return vector_db
 
 
+
 def _split_and_load_docs(docs):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=5000,
-        chunk_overlap=1000,
+        chunk_size=1000,
+        chunk_overlap=200,
     )
 
     document_chunks = text_splitter.split_documents(docs)
+    
+    save_data = initialize_vector_db(document_chunks)
+    if save_data:
+        st.session_state.vector_db = save_data
 
-    if "vector_db" not in st.session_state:
-        st.session_state.vector_db = initialize_vector_db(docs)
-    else:
-        st.session_state.vector_db.add_documents(document_chunks)
+
+    # if "vector_db" not in st.session_state:
+    #     st.session_state.vector_db = initialize_vector_db(docs)
+    # else:
+    #     st.session_state.vector_db.add_documents(document_chunks)
 
 
 # --- Retrieval Augmented Generation (RAG) Phase ---
 
-def _get_context_retriever_chain(vector_db, llm):
-    retriever = vector_db.as_retriever()
+def _get_context_retriever_chain(llm):
+    openai_api_key = config(
+        'OPENAI_API_KEY'
+    )
+    print("OpenAI API key from config:", openai_api_key)
+    db_path = "./chroma_db"
+    client = chromadb.PersistentClient(path=db_path)
+    embedding = OpenAIEmbeddings(api_key=openai_api_key)
+    
+    vector_db = Chroma(
+        client=client,
+        embedding_function=embedding,
+    )
+    
+    retriever = vector_db.as_retriever(search_type="mmr", search_kwargs={"k": 5, "include_metadata": True})
     prompt = ChatPromptTemplate.from_messages([
         MessagesPlaceholder(variable_name="messages"),
         ("user", "{input}"),
@@ -150,7 +188,7 @@ def _get_context_retriever_chain(vector_db, llm):
 
 
 def get_conversational_rag_chain(llm):
-    retriever_chain = _get_context_retriever_chain(st.session_state.vector_db, llm)
+    retriever_chain = _get_context_retriever_chain(llm)
 
     prompt = ChatPromptTemplate.from_messages([
         ("system",

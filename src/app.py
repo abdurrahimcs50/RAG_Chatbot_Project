@@ -6,6 +6,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from langchain.schema import HumanMessage, AIMessage
 from langchain_openai import ChatOpenAI
+from decouple import config
 
 from rag_methods import (
     load_doc_to_db,
@@ -43,14 +44,15 @@ logger = logging.getLogger(__name__)
 dotenv.load_dotenv()
 
 # Define available models based on environment variables
-if "AZ_OPENAI_API_KEY" not in os.environ:
+get_openai_api_key = config('OPENAI_API_KEY')
+print("OpenAI API key from config:", get_openai_api_key)
+if not get_openai_api_key:
     MODELS = [
         "openai/gpt-4o",
         "openai/gpt-4o-mini",
-        "anthropic/claude-3-5-sonnet-20240620",
     ]
 else:
-    MODELS = ["azure-openai/gpt-4o"]
+    MODELS = ["openai/gpt-4o", "openai/gpt-4o-mini"]
 
 # --- Streamlit App Configuration ---
 st.set_page_config(
@@ -95,11 +97,15 @@ with st.sidebar:
     )
     logger.info("Sidebar notes section rendered.")
 
-    # Check for Azure OpenAI API Key
-    if "AZ_OPENAI_API_KEY" not in os.environ:
+    # Check for OpenAI API Key
+    if not get_openai_api_key:
         # OpenAI API Key Input
-        default_openai_api_key = os.getenv("OPENAI_API_KEY", "")
-        with st.expander("🔐 OpenAI API Key"):
+        default_openai_api_key = config('OPENAI_API_KEY')
+        print("OpenAI API key from config:", default_openai_api_key)
+        if not default_openai_api_key:
+            default_openai_api_key = ""
+
+        with st.expander("🔐 Enter Your OpenAI API Key"):
             openai_api_key = st.text_input(
                 "Enter your OpenAI API Key (https://platform.openai.com/) to get started",
                 value=default_openai_api_key,
@@ -108,6 +114,8 @@ with st.sidebar:
             )
             if openai_api_key:
                 logger.info("OpenAI API Key provided by user.")
+    else:
+        openai_api_key = get_openai_api_key
 
 # --- Main Content ---
 # Check if necessary API keys are present
@@ -115,7 +123,7 @@ missing_openai = (
     openai_api_key == "" or openai_api_key is None or "sk-" not in openai_api_key
 )
 # if missing_openai and ("AZ_OPENAI_API_KEY" not in os.environ):
-if missing_openai and ("AZ_OPENAI_API_KEY" not in os.environ):
+if missing_openai and get_openai_api_key is None:
     st.write("#")
     st.warning("⚠️ Please enter an API Key to unlock model access...")
     logger.warning("No valid API keys detected for OpenAI or Azure OpenAI models.")
