@@ -1,0 +1,20 @@
+services:
+  # The web service is your Django application.
+  web:
+    build:
+      # The context is the directory containing the Dockerfile.
+      context: ./src/
+    # The command to start RAG application.
+    command: streamlit run app.py
+    volumes:
+      # Mount the application code into the container.
+      # This is useful for development, as it lets you edit code without rebuilding the image.
+      - ./src/:/usr/src/app/
+    ports:
+      # Expose port 8000 in the container to port 8000 on the host machine.
+      - 8000:8501
+    env_file:
+      # Use environment variables from a .env file.
+      # This is where you should put any secrets, like your SECRET_KEY.
+      - ./src/.env
+  # These are the volumes used above.

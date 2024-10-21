@@ -72,9 +72,11 @@ Follow these steps to set up the RAG-Enhanced Chatbot Application on your local 
 
 ### Prerequisites
 
-- **Python 3.7+**
+- **Python 3.11+**
 - **pip** (Python package installer)
 - **Git** (for cloning the repository)
+- **Docker** (for containerized deployments)
+
 
 ### Steps
 
@@ -129,7 +131,7 @@ Follow these steps to set up the RAG-Enhanced Chatbot Application on your local 
 2. **Model Selection**
 
    - Choose your preferred language model from the dropdown menu in the sidebar.
-   - Options include `openai/gpt-4o`, `openai/gpt-4o-mini`, and `azure-openai/gpt-4o` depending on your API keys.
+   - Options include `openai/gpt-4o`, `openai/gpt-4o-mini` depending on your API keys.
 
 3. **RAG Source Uploads**
 
