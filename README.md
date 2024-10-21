@@ -1,13 +1,14 @@
 
-# RAG-Enhanced Chatbot Application 📚🤖
+# RAG - Enhanced Chatbot Application Using Langchain and Streamlit 📚🤖
 
 ![RAG Chatbot Banner](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/RAG-Enhanced%20Chatbot%20Application.png)
 
 ## Table of Contents
 
-- [RAG-Enhanced Chatbot Application 📚🤖](#rag-enhanced-chatbot-application-)
+- [RAG - Enhanced Chatbot Application Using Langchain and Streamlit 📚🤖](#rag---enhanced-chatbot-application-using-langchain-and-streamlit-)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
+- [Project Goal](#project-goal)
   - [Features](#features)
   - [Demo](#demo)
     - [Chat Interface](#chat-interface)
@@ -30,15 +31,18 @@ Welcome to the **RAG-Enhanced Chatbot Application**, a powerful and scalable cha
 
 Whether you're developing an e-commerce platform, a real estate service, or any application that requires dynamic and informed conversational agents, our chatbot offers the flexibility and robustness you need.
 
-## Features
+# Project Goal
 
+The goal of this project is to build a highly responsive and intelligent chatbot using Retrieval-Augmented Generation (RAG). The chatbot integrates Large Language Models (LLMs), such as OpenAI's GPT, with a document retriever mechanism powered by ChromaDB. This approach enhances the chatbot’s ability to provide precise, context-aware answers by referring to uploaded documents and web resources. The entire solution is designed to be efficient, scalable, and easily deployable via Docker.
+
+## Features
+- **Real-Time Chat Interface**: Seamless AI-driven conversation interface.
+- **Document Uploads**: Upload various file formats (PDF, DOCX, TXT, MD) for data retrieval.
 - **OpenAI GPT-4 Integration**: Utilizes OpenAI's GPT-4 models for advanced language generation.
 - **RAG Integration**: Enhance chatbot responses by uploading documents or providing URLs, enabling the chatbot to retrieve and utilize external knowledge.
 - **User-Friendly Interface**: Intuitive Streamlit-based UI with sidebar controls for API key management, model selection, and RAG source uploads.
 - **Comprehensive Logging**: Detailed logging of user interactions, model selections, and system events stored in a dedicated `logs/` folder with log rotation.
-- **Real-Time Date & Time**: Displays the current date and time for better context and user experience.
-- **Responsive Design**: Optimized for various devices ensuring a seamless user experience.
-- **Secure API Key Handling**: Secure input fields for API keys with sensitive information protection.
+
 
 ## Demo
 
@@ -51,7 +55,7 @@ Check out a short demo of the application in action:
 Watch the application in action:
 
 <!-- [![Watch the Demo](https://img.youtube.com/vi/P8tOjiYEFqU/0.jpg)](https://www.youtube.com/watch?v=P8tOjiYEFqU) -->
-[![Watch the Demo](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)](https://www.youtube.com/)
+[![Watch the Demo](https://github.com/abdurrahimcs50/RAG_Chatbot_Project/blob/main/assets/demo-thumbnail.png.png?raw=true)](#)
 
 *Click the image above to watch the demo video.*
 
